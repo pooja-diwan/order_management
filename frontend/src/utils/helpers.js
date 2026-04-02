@@ -39,14 +39,16 @@ export const STATUS_META = {
 export const ALL_STATUSES = ["PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"];
 
 export function formatCurrency(amount) {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-IN", {
         style: "currency",
-        currency: "USD",
+        currency: "INR",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
     }).format(amount);
 }
 
 export function formatDate(iso) {
-    return new Date(iso).toLocaleString("en-US", {
+    return new Date(iso).toLocaleString("en-IN", {
         month: "short",
         day: "numeric",
         year: "numeric",
@@ -57,4 +59,16 @@ export function formatDate(iso) {
 
 export function shortId(id) {
     return id.slice(0, 8).toUpperCase();
+}
+
+export function getDiscountPercent(price, original_price) {
+    if (!original_price || original_price <= price) return 0;
+    return Math.round(((original_price - price) / original_price) * 100);
+}
+
+export function renderStars(avg) {
+    const full  = Math.floor(avg);
+    const half  = avg - full >= 0.5;
+    const empty = 5 - full - (half ? 1 : 0);
+    return { full, half, empty };
 }

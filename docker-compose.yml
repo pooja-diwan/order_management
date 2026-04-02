@@ -35,6 +35,7 @@ services:
       - MYSQL_PASSWORD=orderpass
       - MYSQL_DATABASE=orderdb
       - GEMINI_API_KEY=AIzaSyBjm8I6isIpDLk2K32uBogope1SssN3trY
+      - JWT_SECRET=orderflow-prod-jwt-secret-change-me
     depends_on:
       db:
         condition: service_healthy
